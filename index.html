@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Closet Flex - a Flexbox learning game">
+  <title>Closet Flex</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">👗</span>
+      <div><h1>Closet Flex</h1><p>Learn Flexbox by organizing your closet</p></div>
+    </div>
+    <div class="progress-area">
+      <span id="stage-label">Stage 1 of 6</span>
+      <span id="attempts-label">Attempts: 0</span>
+    </div>
+  </header>
+
+  <main class="app">
+    <section class="panel instructions-panel">
+      <p class="eyebrow">YOUR TASK</p>
+      <h2 id="stage-title"></h2>
+      <p id="stage-instruction"></p>
+      <div class="stage-dots" id="stage-dots"></div>
+      <div class="tip-box"><strong>Tip</strong><p id="stage-tip"></p></div>
+    </section>
+
+    <section class="game-column">
+      <div class="board-scroll">
+        <div class="closet-shell">
+          <div class="closet-top"><span>LINEN CLOSET</span><span>✨</span></div>
+          <div id="game-board" class="game-board"></div>
+          <div class="closet-bottom"><span></span><span></span></div>
+        </div>
+      </div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel controls-panel">
+      <p class="eyebrow">FLEXBOX CONTROLS</p>
+      <h2>Organize the closet</h2>
+
+      <div class="control">
+        <label for="flex-direction">flex-direction</label>
+        <select id="flex-direction">
+          <option value="row">row</option><option value="row-reverse">row-reverse</option>
+          <option value="column">column</option><option value="column-reverse">column-reverse</option>
+        </select>
+        <small id="note-flex-direction"></small>
+      </div>
+
+      <div class="control">
+        <label for="justify-content">justify-content</label>
+        <select id="justify-content">
+          <option value="flex-start">flex-start</option><option value="flex-end">flex-end</option>
+          <option value="center">center</option><option value="space-between">space-between</option>
+          <option value="space-around">space-around</option><option value="space-evenly">space-evenly</option>
+        </select>
+        <small id="note-justify-content"></small>
+      </div>
+
+      <div class="control">
+        <label for="align-items">align-items</label>
+        <select id="align-items">
+          <option value="stretch">stretch</option><option value="flex-start">flex-start</option>
+          <option value="flex-end">flex-end</option><option value="center">center</option>
+        </select>
+        <small id="note-align-items"></small>
+      </div>
+
+      <div class="control">
+        <label for="flex-wrap">flex-wrap</label>
+        <select id="flex-wrap">
+          <option value="nowrap">nowrap</option><option value="wrap">wrap</option>
+          <option value="wrap-reverse">wrap-reverse</option>
+        </select>
+        <small id="note-flex-wrap"></small>
+      </div>
+
+      <div class="button-row">
+        <button id="check-btn" class="btn primary" type="button">Check Answer</button>
+        <button id="reset-btn" class="btn secondary" type="button">Reset Stage</button>
+      </div>
+      <button id="next-btn" class="btn next hidden" type="button">Next Stage →</button>
+    </section>
+  </main>
+
+  <section id="completion-screen" class="completion-screen hidden">
+    <div class="completion-card">
+      <span class="completion-emoji">🎉</span>
+      <p class="eyebrow">CLOSET COMPLETE</p>
+      <h2>Perfectly organized!</h2>
+      <p>You completed all 6 Flexbox stages and practiced <strong>flex-direction</strong>,
+      <strong>justify-content</strong>, <strong>align-items</strong> and <strong>flex-wrap</strong>.</p>
+      <p id="final-attempts" class="final-score"></p>
+      <button id="restart-btn" class="btn primary" type="button">Play Again</button>
+    </div>
+  </section>
+
+  <footer><p>Closet Flex · Built with HTML, CSS &amp; JavaScript</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
