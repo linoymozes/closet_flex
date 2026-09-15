@@ -3,40 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Closet Flex - a Flexbox learning game">
+  <meta name="description" content="Closet Flex - an interactive Flexbox training playground">
   <title>Closet Flex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <span class="brand-icon">👗</span>
-      <div><h1>Closet Flex</h1><p>Learn Flexbox by organizing your closet</p></div>
+      <div>
+        <h1>Closet Flex</h1>
+        <p>Learn Flexbox by organizing your closet</p>
+      </div>
     </div>
-    <div class="progress-area">
-      <span id="stage-label">Stage 1 of 6</span>
-      <span id="attempts-label">Attempts: 0</span>
+    <div class="header-metrics">
+      <div class="metric-chip">
+        <span class="metric-label">STAGE</span>
+        <span id="stage-label" class="metric-value">Stage 1 of 8</span>
+      </div>
+      <div class="metric-chip">
+        <span class="metric-label">TIME</span>
+        <span id="timer-display" class="metric-value">00:00</span>
+      </div>
+      <div class="metric-chip">
+        <span class="metric-label">CHECKS</span>
+        <span id="attempts-label" class="metric-value">0</span>
+      </div>
+      <button id="help-toggle-btn" class="icon-action-btn" title="Open Flexbox Cheatsheet" type="button">💡 Cheatsheet</button>
     </div>
   </header>
 
   <main class="app">
     <section class="panel instructions-panel">
-      <p class="eyebrow">YOUR TASK</p>
-      <h2 id="stage-title"></h2>
-      <p id="stage-instruction"></p>
-      <div class="stage-dots" id="stage-dots"></div>
-      <div class="tip-box"><strong>Tip</strong><p id="stage-tip"></p></div>
+      <div class="panel-header">
+        <p class="eyebrow">STAGE BRIEFING</p>
+        <span id="level-difficulty-badge" class="badge">Beginner</span>
+      </div>
+      <h2 id="stage-title">Loading Stage...</h2>
+      <p id="stage-instruction" class="stage-desc"></p>
+      
+      <div class="navigation-stepper">
+        <p class="stepper-label">Stage Select</p>
+        <div class="stage-dots" id="stage-dots"></div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-header">
+          <span class="tip-icon">💡</span>
+          <strong>HINT & CONCEPT</strong>
+        </div>
+        <p id="stage-tip"></p>
+      </div>
+
+      <div class="keyboard-legend">
+        <p class="legend-title">Keyboard Shortcuts</p>
+        <div class="keys-grid">
+          <span class="key-combo"><kbd>Enter</kbd> Check</span>
+          <span class="key-combo"><kbd>R</kbd> Reset</span>
+          <span class="key-combo"><kbd>→</kbd> Next</span>
+        </div>
+      </div>
     </section>
 
     <section class="game-column">
       <div class="board-scroll">
         <div class="closet-shell">
-          <div class="closet-top"><span>LINEN CLOSET</span><span>✨</span></div>
+          <div class="closet-top">
+            <div class="closet-status-dot"></div>
+            <span>MASTER WALK-IN WARDROBE</span>
+            <span class="closet-accent">✨</span>
+          </div>
           <div id="game-board" class="game-board"></div>
-          <div class="closet-bottom"><span></span><span></span></div>
+          <div class="closet-bottom">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
       <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
@@ -44,66 +89,128 @@
 
     <section class="panel controls-panel">
       <p class="eyebrow">FLEXBOX CONTROLS</p>
-      <h2>Organize the closet</h2>
+      <h2>Layout Configuration</h2>
 
-      <div class="control">
-        <label for="flex-direction">flex-direction</label>
-        <select id="flex-direction">
-          <option value="row">row</option><option value="row-reverse">row-reverse</option>
-          <option value="column">column</option><option value="column-reverse">column-reverse</option>
-        </select>
-        <small id="note-flex-direction"></small>
+      <div class="control-group">
+        <div class="control">
+          <div class="control-header">
+            <label for="flex-direction">flex-direction</label>
+            <span class="status-indicator" id="indicator-flex-direction"></span>
+          </div>
+          <select id="flex-direction">
+            <option value="row">row</option>
+            <option value="row-reverse">row-reverse</option>
+            <option value="column">column</option>
+            <option value="column-reverse">column-reverse</option>
+          </select>
+          <small id="note-flex-direction"></small>
+        </div>
+
+        <div class="control">
+          <div class="control-header">
+            <label for="justify-content">justify-content</label>
+            <span class="status-indicator" id="indicator-justify-content"></span>
+          </div>
+          <select id="justify-content">
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="space-between">space-between</option>
+            <option value="space-around">space-around</option>
+            <option value="space-evenly">space-evenly</option>
+          </select>
+          <small id="note-justify-content"></small>
+        </div>
+
+        <div class="control">
+          <div class="control-header">
+            <label for="align-items">align-items</label>
+            <span class="status-indicator" id="indicator-align-items"></span>
+          </div>
+          <select id="align-items">
+            <option value="stretch">stretch</option>
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+          </select>
+          <small id="note-align-items"></small>
+        </div>
+
+        <div class="control">
+          <div class="control-header">
+            <label for="flex-wrap">flex-wrap</label>
+            <span class="status-indicator" id="indicator-flex-wrap"></span>
+          </div>
+          <select id="flex-wrap">
+            <option value="nowrap">nowrap</option>
+            <option value="wrap">wrap</option>
+            <option value="wrap-reverse">wrap-reverse</option>
+          </select>
+          <small id="note-flex-wrap"></small>
+        </div>
       </div>
 
-      <div class="control">
-        <label for="justify-content">justify-content</label>
-        <select id="justify-content">
-          <option value="flex-start">flex-start</option><option value="flex-end">flex-end</option>
-          <option value="center">center</option><option value="space-between">space-between</option>
-          <option value="space-around">space-around</option><option value="space-evenly">space-evenly</option>
-        </select>
-        <small id="note-justify-content"></small>
+      <div class="action-buttons">
+        <div class="button-row">
+          <button id="check-btn" class="btn primary" type="button">Check Setup</button>
+          <button id="reset-btn" class="btn secondary" type="button">Reset</button>
+        </div>
+        <button id="next-btn" class="btn next hidden" type="button">Advance to Next Stage →</button>
       </div>
-
-      <div class="control">
-        <label for="align-items">align-items</label>
-        <select id="align-items">
-          <option value="stretch">stretch</option><option value="flex-start">flex-start</option>
-          <option value="flex-end">flex-end</option><option value="center">center</option>
-        </select>
-        <small id="note-align-items"></small>
-      </div>
-
-      <div class="control">
-        <label for="flex-wrap">flex-wrap</label>
-        <select id="flex-wrap">
-          <option value="nowrap">nowrap</option><option value="wrap">wrap</option>
-          <option value="wrap-reverse">wrap-reverse</option>
-        </select>
-        <small id="note-flex-wrap"></small>
-      </div>
-
-      <div class="button-row">
-        <button id="check-btn" class="btn primary" type="button">Check Answer</button>
-        <button id="reset-btn" class="btn secondary" type="button">Reset Stage</button>
-      </div>
-      <button id="next-btn" class="btn next hidden" type="button">Next Stage →</button>
     </section>
   </main>
 
+  <aside id="cheatsheet-modal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Flexbox Quick Reference Guide</h3>
+        <button id="close-modal-btn" class="close-btn" type="button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cheatsheet-row">
+          <code>flex-direction</code>
+          <p>Defines the main axis along which flex items are placed (row or column).</p>
+        </div>
+        <div class="cheatsheet-row">
+          <code>justify-content</code>
+          <p>Aligns items along the <strong>main-axis</strong> and handles remaining free space.</p>
+        </div>
+        <div class="cheatsheet-row">
+          <code>align-items</code>
+          <p>Aligns items across the <strong>cross-axis</strong> (perpendicular to the main axis).</p>
+        </div>
+        <div class="cheatsheet-row">
+          <code>flex-wrap</code>
+          <p>Controls whether flex items are forced onto a single line or can wrap onto multiple lines.</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <section id="completion-screen" class="completion-screen hidden">
     <div class="completion-card">
-      <span class="completion-emoji">🎉</span>
-      <p class="eyebrow">CLOSET COMPLETE</p>
-      <h2>Perfectly organized!</h2>
-      <p>You completed all 6 Flexbox stages and practiced <strong>flex-direction</strong>,
-      <strong>justify-content</strong>, <strong>align-items</strong> and <strong>flex-wrap</strong>.</p>
-      <p id="final-attempts" class="final-score"></p>
-      <button id="restart-btn" class="btn primary" type="button">Play Again</button>
+      <span class="completion-emoji">🏆</span>
+      <p class="eyebrow">CURRICULUM FINISHED</p>
+      <h2>Wardrobe Organization Mastered!</h2>
+      <p>Congratulations! You solved all 8 Flexbox stages, mastering axis distribution, line wrapping, and item alignment.</p>
+      <div class="stats-summary">
+        <div class="summary-box">
+          <span class="summary-num" id="final-attempts">0</span>
+          <span class="summary-txt">Total Validations</span>
+        </div>
+        <div class="summary-box">
+          <span class="summary-num" id="final-time">00:00</span>
+          <span class="summary-txt">Completion Time</span>
+        </div>
+      </div>
+      <button id="restart-btn" class="btn primary" type="button">Play From Beginning</button>
     </div>
   </section>
 
-  <footer><p>Idan Cohen & Linoy Mozes</p></footer>
+  <footer>
+    <p>Idan Cohen & Linoy Mozes</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
